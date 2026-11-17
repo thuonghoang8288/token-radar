@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Radar — Pre-token DeFi, ranked by implied launch value</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="shell">
+  <header class="masthead">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <div>
+        <h1>TOKEN RADAR</h1>
+        <p class="tagline">Pre-token DeFi, ranked by implied launch value</p>
+      </div>
+    </div>
+    <div class="meta" id="meta"></div>
+  </header>
+
+  <section class="lede" id="lede" aria-label="Coverage summary"></section>
+
+  <nav class="tabs" id="tabs" aria-label="Views">
+    <button class="tab active" data-tab="board" type="button">Pre-token board</button>
+    <button class="tab" data-tab="live" type="button">Live token</button>
+    <button class="tab" data-tab="model" type="button">Model</button>
+  </nav>
+
+  <section class="controls" id="controls" aria-label="Filters">
+    <label class="ctl ctl-search">Search
+      <input id="q" type="search" placeholder="Protocol, slug or category" autocomplete="off">
+    </label>
+    <label class="ctl">Category
+      <select id="category"></select>
+    </label>
+    <label class="ctl">Chain
+      <select id="chain"></select>
+    </label>
+    <label class="ctl">Min TVL
+      <select id="tvlmin">
+        <option value="0">Any TVL</option>
+        <option value="10000000">$10M+</option>
+        <option value="25000000">$25M+</option>
+        <option value="50000000">$50M+</option>
+        <option value="100000000">$100M+</option>
+      </select>
+    </label>
+    <label class="ctl ctl-check"><input id="watchonly" type="checkbox"> Watchlist only</label>
+    <span class="count" id="count"></span>
+  </section>
+
+  <main>
+    <section class="panel active" id="panel-board">
+      <div class="table-wrap">
+        <table id="board">
+          <thead>
+            <tr>
+              <th data-sort="rank" class="num">Rank</th>
+              <th data-sort="name">Protocol</th>
+              <th data-sort="tvl_usd" class="num">TVL</th>
+              <th data-sort="change_7d" class="num">7d</th>
+              <th data-sort="age_days" class="num">Age</th>
+              <th data-sort="implied_value_usd" class="num">Implied value</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="board-body"></tbody>
+        </table>
+        <div class="empty" id="empty" hidden>
+          <p>No protocols match the current filters.</p>
+          <button id="clear-filters" type="button">Clear filters</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-live" hidden>
+      <p class="panel-note">Protocols that already trade — the live peers the value model is calibrated against. Top 24 by TVL.</p>
+      <div class="table-wrap">
+        <table id="livetable">
+          <thead>
+            <tr>
+              <th>Protocol</th>
+              <th>Category</th>
+              <th class="num">TVL</th>
+              <th class="num">Market cap</th>
+              <th class="num">Mcap / TVL</th>
+              <th class="num">7d</th>
+            </tr>
+          </thead>
+          <tbody id="live-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-model" hidden>
+      <div class="model-grid">
+        <div class="card">
+          <h2>How the value is built</h2>
+          <div id="formula"></div>
+        </div>
+        <div class="card">
+          <h2>Top category multiples</h2>
+          <div id="chart"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Calibration — median mcap / TVL by category</h2>
+        <p class="card-note">Each category median is shrunk toward the global median (0.2049) with k = 8. Categories with fewer than 3 live peers use the global median.</p>
+        <div class="table-wrap">
+          <table id="calib">
+            <thead><tr><th>Category</th><th class="num">Live peers</th><th class="num">Median mcap / TVL</th><th class="num">Multiple used</th></tr></thead>
+            <tbody id="calib-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer"></footer>
+</div>
+
+<dialog id="detail" class="detail">
+  <div class="detail-inner" id="detail-inner"></div>
+</dialog>
+
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
