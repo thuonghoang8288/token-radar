@@ -75,7 +75,7 @@
     </section>
 
     <section class="panel" id="panel-live" hidden>
-      <p class="panel-note">Protocols that already trade — the live peers the value model is calibrated against. Top 24 by TVL.</p>
+      <p class="panel-note">Protocols that already trade — the live peers the value model is calibrated against. Top 24 by market cap.</p>
       <div class="table-wrap">
         <table id="livetable">
           <thead>
@@ -106,7 +106,7 @@
       </div>
       <div class="card">
         <h2>Calibration — median mcap / TVL by category</h2>
-        <p class="card-note">Each category median is shrunk toward the global median (0.2049) with k = 8. Categories with fewer than 3 live peers use the global median.</p>
+        <p class="card-note">Each category median is shrunk toward the global median with k = 8. Categories with fewer than 3 live peers use the global median. The value is in the formula panel.</p>
         <div class="table-wrap">
           <table id="calib">
             <thead><tr><th>Category</th><th class="num">Live peers</th><th class="num">Median mcap / TVL</th><th class="num">Multiple used</th></tr></thead>
